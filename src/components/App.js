@@ -1,6 +1,5 @@
 import "../styles/App.scss";
 import { useEffect, useState } from "react";
-// import localStorage from "../services/localStorage";
 import getData from "../services/api";
 
 function App() {
@@ -11,8 +10,6 @@ function App() {
     quote: "",
     character: "",
   });
-
-  // const [movies, setMovies] = useState(localStorage.get("movies", []));
 
   ///////EFFECTS
 
@@ -28,7 +25,6 @@ function App() {
   const handleInput = (ev) => {
     const inputValue = ev.target.value;
     const inputChanged = ev.target.id;
-    // const inputChanged = ev.target.name;
     setNewQuote({
       ...newQuote,
       [inputChanged]: inputValue,
@@ -54,44 +50,40 @@ function App() {
   };
 
   /////RENDER HELPERS
-  // const renderFilter = () => {
-  //   return (
-  //     <form>
-  //       <input
-  //         className="header__search"
-  //         autoComplete="off"
-  //         type="search"
-  //         name="search"
-  //         placeholder="Filtrar contactos por nombre"
-  //         value={search}
-  //         onChange={handleSearch}
-  //       />
-  //     </form>
-  //   );
-  // };
+  const renderFilter = () => {
+    return (
+      <form>
+        <label htmlFor="search">Filtrar por frase </label>
+        <input
+          className="header__search"
+          autoComplete="off"
+          type="search"
+          name="search"
+          placeholder="Escribe una frase"
+          value={search}
+          onChange={handleSearch}
+        />
+      </form>
+    );
+  };
 
   const renderList = () => {
-    return (
-      list
+    return list
 
-        // .filter(
-        //   (itemList) =>
-        //     //filtra por nombre O filtra por Apellido
-        //     itemList.name.toLowerCase().includes(search.toLowerCase()) ||
-        //     itemList.lastname.toLowerCase().includes(search.toLowerCase())
-        // )
+      .filter((itemList) =>
+        itemList.quote.toLowerCase().includes(search.toLowerCase())
+      )
 
-        .map((itemList, index) => {
-          return (
-            <li className="quote__item" key={index}>
-              <p className="quote__pharase">
-                {itemList.quote} -{" "}
-                <span className="quote__character">{itemList.character} </span>
-              </p>
-            </li>
-          );
-        })
-    );
+      .map((itemList, index) => {
+        return (
+          <li className="quote__item" key={index}>
+            <p className="quote__pharase">
+              {itemList.quote} -{" "}
+              <span className="quote__character">{itemList.character} </span>
+            </p>
+          </li>
+        );
+      });
   };
 
   const renderAddNewQuote = () => {
@@ -139,13 +131,16 @@ function App() {
     <div className="page">
       <header className="header">
         <h1 className="header__title">Frases de Friends</h1>
-        {/* {renderFilter()} */}
       </header>
 
       <main>
-        <ul className="quote__list">{renderList()}</ul>
+        <section>{renderFilter()}</section>
 
-        {/* {renderAddNewQuote()} */}
+        <section>
+          <ul className="quote__list">{renderList()}</ul>
+        </section>
+
+        <section>{renderAddNewQuote()}</section>
       </main>
     </div>
   );
