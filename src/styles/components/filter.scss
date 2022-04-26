@@ -1,0 +1,17 @@
+.filter {
+    &__search {
+        padding: 0.5rem;
+        width: 20rem;
+        border: 2px solid #ddd;
+        border-radius: 0.5rem;
+        background-color: #f8f8f8;
+        outline: none;
+        transition: all ease 0.3s;
+    
+        &:focus {
+          border-color: #a349a4;
+          background-color: #fff;
+        }
+      }
+
+}

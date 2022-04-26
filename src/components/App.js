@@ -1,6 +1,7 @@
 import "../styles/App.scss";
 import { useEffect, useState } from "react";
 import getData from "../services/api";
+import logoFriends from "../images/Friends-logo-3.png";
 
 function App() {
   ///////STATE
@@ -52,7 +53,7 @@ function App() {
   /////RENDER HELPERS
   const renderFilter = () => {
     return (
-      <form>
+      <form className="filter__search">
         <label htmlFor="search">Filtrar por frase </label>
         <input
           className="header__search"
@@ -130,17 +131,18 @@ function App() {
   return (
     <div className="page">
       <header className="header">
-        <h1 className="header__title">Frases de Friends</h1>
+        <img className="header__logo" src={logoFriends} alt="Logo Friends" />
+        <h1 className="header__title">Frases de la serie</h1>
       </header>
 
       <main>
-        <section>{renderFilter()}</section>
+        <section className="filter">{renderFilter()}</section>
 
-        <section>
+        <section className="quote">
           <ul className="quote__list">{renderList()}</ul>
         </section>
 
-        <section>{renderAddNewQuote()}</section>
+        <section className="new-quote">{renderAddNewQuote()}</section>
       </main>
     </div>
   );
