@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "./static/css/main.231845aa.css",
+    "main.js": "./static/js/main.16fea7cf.js",
+    "static/media/Friends-logo-3.png": "./static/media/Friends-logo-3.2c95a9f954d84fad285d.png",
+    "index.html": "./index.html",
+    "main.231845aa.css.map": "./static/css/main.231845aa.css.map",
+    "main.16fea7cf.js.map": "./static/js/main.16fea7cf.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.231845aa.css",
+    "static/js/main.16fea7cf.js"
+  ]
+}
