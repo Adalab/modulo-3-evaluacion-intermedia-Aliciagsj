@@ -12,6 +12,8 @@ function App() {
     character: "",
   });
 
+  const [filterCharacter, setFilterCharacter] = useState("all");
+
   ///////EFFECTS
 
   useEffect(() => {
@@ -37,6 +39,10 @@ function App() {
     setSearch(ev.target.value);
   };
 
+  const handleFilterCharacter = (ev) => {
+    setFilterCharacter(ev.target.value);
+  };
+
   //Evento Click al pulsar el boton Añadir
   const handleAddnewQuote = (ev) => {
     ev.preventDefault();
@@ -53,10 +59,12 @@ function App() {
   /////RENDER HELPERS
   const renderFilter = () => {
     return (
-      <form className="filter__search">
-        <label htmlFor="search">Filtrar por frase </label>
+      <form className="filter">
+        <label className="filter__label" htmlFor="search">
+          Filtrar por frase
+        </label>
         <input
-          className="header__search"
+          className="filter__input"
           autoComplete="off"
           type="search"
           name="search"
@@ -64,12 +72,35 @@ function App() {
           value={search}
           onChange={handleSearch}
         />
+
+        <label className="filter__label" htmlFor="character">
+          Filtrar por personaje
+        </label>
+        <select
+          className="filter__select"
+          value={filterCharacter}
+          onChange={handleFilterCharacter}
+        >
+          <option value="all">Todos</option>
+          <option value="Ross">Ross</option>
+          <option value="Monica">Monica</option>
+          <option value="Joey">Joey</option>
+          <option value="Phoebe">Phoebe</option>
+          <option value="Chandler">Chandler</option>
+          <option value="Rachel">Rachel</option>
+        </select>
       </form>
     );
   };
 
   const renderList = () => {
     return list
+
+      .filter((item) => {
+        return filterCharacter === "all"
+          ? true
+          : filterCharacter === item.character;
+      })
 
       .filter((itemList) =>
         itemList.quote.toLowerCase().includes(search.toLowerCase())
@@ -93,7 +124,9 @@ function App() {
         <h2 className="new-quote__title">Añade una nueva frase</h2>
 
         <div>
-          <label htmlFor="quote">Frase</label>
+          <label className="new-quote__label" htmlFor="quote">
+            Frase
+          </label>
           <input
             className="new-quote__input"
             type="text"
